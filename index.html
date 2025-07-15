@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insurance Quote Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-blue-700 text-white p-4 text-center text-xl font-semibold">
+    Insurance Quote Portal
+  </nav>
+
+  <div class="max-w-4xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Quote Form -->
+    <div class="bg-white shadow-xl rounded-xl p-6">
+      <h2 class="text-xl font-bold mb-4">Get a Quote</h2>
+      <form id="quoteForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" required class="w-full p-2 border rounded" />
+        <input type="email" name="email" placeholder="Email" required class="w-full p-2 border rounded" />
+        <input type="tel" name="phone" placeholder="Phone" required class="w-full p-2 border rounded" />
+        <select name="insurance_type" required class="w-full p-2 border rounded">
+          <option value="">Insurance Type</option>
+          <option value="auto">Auto</option>
+          <option value="home">Home</option>
+          <option value="life">Life</option>
+          <option value="business">Business</option>
+        </select>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Submit</button>
+      </form>
+      <div id="quoteSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+        Quote submitted! We’ll be in touch.
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="bg-white shadow-xl rounded-xl p-6">
+      <h2 class="text-xl font-bold mb-4">Contact Us</h2>
+      <form id="contactForm" class="space-y-4">
+        <input type="text" name="contact_name" placeholder="Your Name" required class="w-full p-2 border rounded" />
+        <input type="email" name="contact_email" placeholder="Your Email" required class="w-full p-2 border rounded" />
+        <textarea name="message" placeholder="Your Message" required class="w-full p-2 border rounded"></textarea>
+        <button type="submit" class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">Send Message</button>
+      </form>
+      <div id="contactSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+        Message sent! We’ll reply shortly.
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Section -->
+  <div class="max-w-md mx-auto mt-10 bg-white shadow-xl rounded-xl p-6">
+    <h2 class="text-xl font-bold mb-4 text-center">Agent Login</h2>
+    <form id="loginForm" class="space-y-4">
+      <input type="text" name="username" placeholder="Username" required class="w-full p-2 border rounded" />
+      <input type="password" name="password" placeholder="Password" required class="w-full p-2 border rounded" />
+      <button type="submit" class="w-full bg-gray-800 text-white p-2 rounded hover:bg-gray-900">Login</button>
+    </form>
+    <div id="loginSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+      Logged in successfully.
+    </div>
+  </div>
+
+  <script>
+    const salesforceEndpoint = "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8";
+    const orgId = "YOUR_ORG_ID_HERE";
+
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      formData.append('oid', orgId);
+      formData.append('retURL', window.location.href);
+
+      fetch(salesforceEndpoint, {
+        method: 'POST',
+        body: formData
+      }).then(() => {
+        this.classList.add('hidden');
+        document.getElementById('quoteSuccess').classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
+        method: 'POST',
+        body: formData
+      }).then(() => {
+        this.classList.add('hidden');
+        document.getElementById('contactSuccess').classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.classList.add('hidden');
+      document.getElementById('loginSuccess').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
