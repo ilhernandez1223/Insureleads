@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Insurance Quote | InsureLeads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-white text-gray-800 min-h-screen">
+  <main class="max-w-2xl mx-auto p-8 mt-12 bg-white rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold mb-4 text-center">Auto Insurance Quote</h1>
+    <p class="mb-6 text-center text-gray-600">Fill in your vehicle and driver information to receive a tailored quote.</p>
+    <form id="autoQuoteForm" class="space-y-4">
+      <div>
+        <label class="block font-semibold mb-1">Vehicle Year</label>
+        <input type="number" name="vehicle_year" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 2020" required />
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold mb-1">Make</label>
+          <input type="text" name="make" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. Toyota" required />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Model</label>
+          <input type="text" name="model" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. Camry" required />
+        </div>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">VIN Number <span class="text-sm text-gray-500">(optional)</span></label>
+        <input type="text" name="vin" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="17-character VIN" />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Current Insurance Provider</label>
+        <input type="text" name="current_insurance" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. GEICO, State Farm" />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">How long have you been with them?</label>
+        <select name="insurance_duration" class="w-full p-3 border border-gray-300 rounded-lg" required>
+          <option value="">-- Select Duration --</option>
+          <option value="0-5 months">0-5 months</option>
+          <option value="6-11 months">6-11 months</option>
+          <option value="12-23 months">12-23 months</option>
+          <option value="24+ months">24+ months</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Zip Code</label>
+        <input type="text" name="zip" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 75201" required />
+      </div>
+      <div class="text-center">
+        <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg mt-4">
+          Get Quote
+        </button>
+      </div>
+    </form>
+    <div id="submitSuccess" class="hidden mt-6 text-green-600 font-semibold text-center">
+      ✅ Your auto quote request has been submitted!
+    </div>
+  </main>
+  <footer class="text-center text-sm text-gray-500 mt-16 p-6">
+    © 2025 InsureLeads. All rights reserved.
+  </footer>
+  <script>
+    document.getElementById("autoQuoteForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      this.reset();
+      document.getElementById("submitSuccess").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
