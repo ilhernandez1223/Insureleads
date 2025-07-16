@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InsureLeads | Get an Insurance Quote</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/633/633759.png" />
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-800">
+  <header class="bg-blue-800 text-white p-6 text-center shadow-md">
+    <h1 class="text-3xl font-bold">InsureLeads</h1>
+    <p class="text-sm">Affordable Quotes. Fast. Secure. Reliable.</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Quote Form -->
+    <section class="bg-white shadow-lg rounded-xl p-6">
+      <h2 class="text-2xl font-semibold mb-4">Request a Free Insurance Quote</h2>
+      <form id="quoteForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border border-gray-300 rounded-lg" />
+        <input type="email" name="email" placeholder="Email Address" required class="w-full p-3 border border-gray-300 rounded-lg" />
+        <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border border-gray-300 rounded-lg" />
+        <select name="insurance_type" required class="w-full p-3 border border-gray-300 rounded-lg">
+          <option value="">-- Select Insurance Type --</option>
+          <option value="auto">Auto Insurance</option>
+          <option value="home">Home Insurance</option>
+          <option value="life">Life Insurance</option>
+          <option value="business">Business Insurance</option>
+        </select>
+        <button type="submit" class="w-full bg-blue-700 text-white font-bold p-3 rounded-lg hover:bg-blue-800">Get My Quote</button>
+      </form>
+      <div id="quoteSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+        ✅ Thanks! We’ll be in touch very soon.
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="bg-white shadow-lg rounded-xl p-6">
+      <h2 class="text-2xl font-semibold mb-4">Have Questions? Contact Us</h2>
+      <form id="contactForm" class="space-y-4">
+        <input type="text" name="contact_name" placeholder="Your Name" required class="w-full p-3 border border-gray-300 rounded-lg" />
+        <input type="email" name="contact_email" placeholder="Your Email" required class="w-full p-3 border border-gray-300 rounded-lg" />
+        <textarea name="message" placeholder="Your Message" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+        <button type="submit" class="w-full bg-green-600 text-white font-bold p-3 rounded-lg hover:bg-green-700">Send Message</button>
+      </form>
+      <div id="contactSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+        ✅ Message sent! We'll reply shortly.
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Section -->
+  <section class="max-w-md mx-auto mt-12 bg-white shadow-lg rounded-xl p-6">
+    <h2 class="text-xl font-bold text-center mb-4">Agent Login</h2>
+    <form id="loginForm" class="space-y-4">
+      <input type="text" name="username" placeholder="Username" required class="w-full p-3 border border-gray-300 rounded-lg" />
+      <input type="password" name="password" placeholder="Password" required class="w-full p-3 border border-gray-300 rounded-lg" />
+      <button type="submit" class="w-full bg-gray-800 text-white font-bold p-3 rounded-lg hover:bg-gray-900">Login</button>
+    </form>
+    <div id="loginSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">
+      ✅ Logged in successfully.
+    </div>
+  </section>
+
+  <footer class="text-center text-sm text-gray-500 mt-12 p-4">
+    © 2025 InsureLeads. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('https://script.google.com/macros/s/AKfycbztVVY52qZgtMPNuD-v8wBtS0gfXlszoYH9Kxh11gnq1TdBL5FsNSVlBekdxoLj7kqzyA/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          insurance_type: formData.get('insurance_type')
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(() => {
+        this.reset();
+        document.getElementById('quoteSuccess').classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('https://script.google.com/macros/s/AKfycbztVVY52qZgtMPNuD-v8wBtS0gfXlszoYH9Kxh11gnq1TdBL5FsNSVlBekdxoLj7kqzyA/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formData.get('contact_name'),
+          email: formData.get('contact_email'),
+          message: formData.get('message')
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(() => {
+        this.reset();
+        document.getElementById('contactSuccess').classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.reset();
+      document.getElementById('loginSuccess').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
